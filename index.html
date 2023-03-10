@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Генератор кольору</title>
+  </head>
+  <body>
+    <div id="info-field">
+      <p>Color:</p>
+      <div id="color-text">
+        <p id="current-color-hex">#162c3f</p>
+        <p id="current-color-rgb">rgb(22, 44, 63)</p>
+      </div>
+      <div id="copy-buttons">
+        <button type="button" id="copy-btn-hex">Copy HEX</button>
+        <button type="button" id="copy-btn-rgb">Copy RGB</button>
+      </div>
+    </div>
+    <button type="button" id="color-btn">Generate color</button>
+    <textarea id="copytextarea"></textarea>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: ease-in, 0.8s;
+        background-color: #162c3f;
+      }
+
+      #copytextarea {
+        visibility: hidden;
+      }
+
+      #info-field {
+        margin-top: 5em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 350px;
+        min-height: max-content;
+        border-radius: 10px;
+        font-size: 1em;
+        background-color: black;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      #color-btn {
+        color: white;
+        background-color: transparent;
+        padding: 0.6em;
+        border-radius: 8px;
+        border-width: 1px;
+        border-color: rgba(3, 3, 3, 0.9);
+        cursor: pointer;
+        margin-top: 1.2em;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-size: large;
+      }
+
+      #color-btn:hover,
+      #copy-btn-hex:hover,
+      #copy-btn-rgb:hover {
+        background-color: #793029;
+        color: rgba(3, 3, 3, 0.9);
+        transition: ease-in-out, 200ms;
+      }
+
+      #current-color-hex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1.4em;
+        min-width: 160px;
+        margin-top: 1em;
+        transition: ease-in, 300ms;
+        color: #293143;
+        font-size: 1em;
+      }
+
+      #current-color-rgb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0em;
+        min-width: 160px;
+        padding-left: 1em;
+        transition: ease-in, 300ms;
+        color: #293143;
+        font-size: 1em;
+      }
+
+      #copy-btn-hex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.2em;
+        padding-bottom: 0.3em;
+        margin-left: 2.7em;
+        height: 28px;
+        color: white;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: small;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        border-radius: 5px;
+        border: none;
+      }
+
+      #copy-btn-rgb {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0.2em;
+        padding-bottom: 0.3em;
+        margin-left: 2.7em;
+        margin-top: 0.6em;
+        height: 28px;
+        color: white;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: small;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        border-radius: 5px;
+        border: none;
+      }
+    </style>
+    <script>
+      const setBgColor = () => {
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+        console.log(randomColor.length);
+        console.log(randomColor);
+        document.body.style.backgroundColor = "#" + randomColor;
+        currentColorHex.innerHTML = "#" + randomColor;
+        currentColorHex.style.color = "#" + randomColor;
+        currentColorRgb.innerHTML = document.body.style.backgroundColor;
+        currentColorRgb.style.color = currentColorHex.style.color;
+      };
+
+      function copyHEX() {
+        let text = currentColorHex.innerText;
+        navigator.clipboard.writeText(text);
+        alert("HEX-код скопійовано!");
+      }
+
+      function copyRGB() {
+        let text = currentColorRgb.innerText;
+        navigator.clipboard.writeText(text);
+        alert("RGB-код скопійовано!");
+      }
+
+      let currentColorHex = document.getElementById("current-color-hex");
+      let currentColorRgb = document.getElementById("current-color-rgb");
+      let copyButtonHex = document.getElementById("copy-btn-hex");
+      copyButtonHex.addEventListener("click", copyHEX);
+      let colorButton = document.getElementById("color-btn");
+      colorButton.addEventListener("click", setBgColor);
+      let copyButtonRgb = document.getElementById("copy-btn-rgb");
+      copyButtonRgb.addEventListener("click", copyRGB);
+    </script>
+    <footer></footer>
+  </body>
+</html>
